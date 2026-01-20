@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { AnimatedThemeToggle } from "@/components/animated-theme-toggle"
+import { BoxReveal } from "@/components/magicui/box-reveal"
 
 // ============================================
 // DYNAMIC CONTENT CONFIGURATION
@@ -13,7 +14,7 @@ const PERSONAL_INFO = {
   firstName: "Abdullah",
   lastName: "Ejaz",
   tagline: "Computer Science enthusiast passionate about exploring the tech world through",
-  taglineHighlights: ["design", "programming", "development"],
+  taglineHighlights: ["Design", "Programming & Development"],
   status: "Available for opportunities",
   location: "Faisalabad, Pakistan",
   email: "killerbrine55@gmail.com",
@@ -31,12 +32,13 @@ const CURRENT_POSITION = {
 
 // Focus Areas/Skills
 const FOCUS_AREAS = [
-  "Web Dev",
+  "Full Stack Development",
   "Mobile App Dev",
   "UI/UX Engineering",
   "RAG",
   "AI/ML",
   "LLMs",
+  "Frontend Design",
 ]
 
 // Education Items
@@ -64,7 +66,7 @@ const EDUCATION_ITEMS = [
 // Experience Items
 const EXPERIENCE_ITEMS = [
   {
-    year: "2024 - 2025",
+    year: "2024 - 25",
     role: "Graphics Designer",
     company: "Google Developers Group NUST",
     description: "Created visual designs and branding materials for tech events and community initiatives.",
@@ -86,7 +88,7 @@ const PROJECTS = [
     excerpt: "Built a MERN full-stack crime data platform with real-time mapping, AI-based trend forecasting, and safe route planning. Features include public crime reporting, analytics dashboards, and heatmap visualizations.",
     tech: "React, Node.js, MongoDB",
     category: "Crime Analysis Platform",
-    
+    type: ["Web"],
     link: "https://www.crimevision.live/", // Add project URL here
   },
   {
@@ -94,6 +96,7 @@ const PROJECTS = [
     excerpt: "A Python game based on fundamental AI concepts including Genetic Algorithms, Fuzzy Logic, and Procedural Generation to create a fun and addicting gameplay experience. Players navigate through increasingly complex trap-filled levels that adapt to their playstyle.",
     tech: "Python, Pygame, AI",
     category: "Game Development",
+    type: ["Game", "AI/ML"],
     link: "https://github.com/GitMithril/The_Annoying_Traps", // Add project URL here
   },
   {
@@ -101,6 +104,7 @@ const PROJECTS = [
     excerpt: "An SFML-based C++ game inspired by Clash of Clans, featuring strategic gameplay, resource management, and base building mechanics.",
     tech: "C++, SFML",
     category: "Game Development",
+    type: ["Game"],
     link: "https://github.com/GitMithril/Stronghold_Reckon", // Add project URL here
   },
   {
@@ -108,6 +112,7 @@ const PROJECTS = [
     excerpt: "ML Based Web Application to Predict power lost due to smog levels (PM2.5) in the air, using regression and tree based models and data from sources such as NASA POWER and OpenAQ for weather. Trained on 3 years of data.",
     tech: "Python, ML, Web Development",
     category: "ML / WebDev",
+    type: ["Web", "AI/ML"],
     link: "https://github.com/GitMithril/Smog-Penalty", // Add project URL here
   },
 ]
@@ -162,6 +167,25 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("")
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
 
+  // Projects Filter & Pagination State
+  const [activeCategory, setActiveCategory] = useState("All")
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const filteredProjects = PROJECTS.filter((project) => {
+    if (activeCategory === "All") return true
+    return project.type.includes(activeCategory)
+  })
+
+  const totalPages = Math.ceil(filteredProjects.length / 4)
+  const paginatedProjects = filteredProjects.slice(
+    (currentPage - 1) * 4,
+    currentPage * 4,
+  )
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [activeCategory])
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -189,81 +213,101 @@ export default function Home() {
         <AnimatedThemeToggle variant="circle" start="top-right" />
       </div>
 
-      <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
+      <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-10 hidden lg:block group p-4">
         <div className="flex flex-col gap-4">
           {NAV_SECTIONS.map((section) => (
-            <button
-              key={section}
-              onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-2 h-8 rounded-full transition-all duration-500 ${
-                activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
-              }`}
-              aria-label={`Navigate to ${section}`}
-            />
+            <div key={section} className="relative flex items-center">
+              <button
+                onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
+                className={`w-2 h-8 rounded-full transition-all duration-500 ${
+                  activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                }`}
+                aria-label={`Navigate to ${section}`}
+              />
+              <span className="absolute left-6 text-xs font-mono uppercase tracking-wider text-muted-foreground whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none">
+                {section}
+              </span>
+            </div>
           ))}
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16">
+      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10">
         <header
           id="intro"
           ref={(el) => { sectionsRef.current[0] = el }}
-          className="min-h-screen flex items-center opacity-0"
+          className="min-h-screen flex items-center"
         >
           <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
             <div className="lg:col-span-3 space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-2">
-                <div className="text-sm text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2025</div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight">
-                  {PERSONAL_INFO.firstName}
-                  <br />
-                  <span className="text-muted-foreground">{PERSONAL_INFO.lastName}</span>
-                </h1>
+                <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
+                  <div className="text-sm pl-1 text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
+                </BoxReveal>
+                <BoxReveal boxColor={"#939393"} duration={0.5}>
+                  <h1 className="text-5xl pb-3 sm:text-6xl lg:text-7xl font-light tracking-tight">
+                    {PERSONAL_INFO.firstName}
+                    <br />
+                    <span className="text-muted-foreground">{PERSONAL_INFO.lastName}</span>
+                  </h1>
+                </BoxReveal>
               </div>
 
               <div className="space-y-6 max-w-md">
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                  {PERSONAL_INFO.tagline}
-                  {PERSONAL_INFO.taglineHighlights.map((highlight, idx) => (
-                    <span key={highlight}>
-                      <span className="text-foreground"> {highlight}</span>
-                      {idx < PERSONAL_INFO.taglineHighlights.length - 1 ? "," : "."}
-                    </span>
-                  ))}
-                </p>
+                <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
+                  <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                    {PERSONAL_INFO.tagline}
+                    {PERSONAL_INFO.taglineHighlights.map((highlight, idx) => (
+                      <span key={highlight}>
+                        <span className="text-foreground"> {highlight}</span>
+                        {idx < PERSONAL_INFO.taglineHighlights.length - 1 ? "," : "."}
+                      </span>
+                    ))}
+                  </p>
+                </BoxReveal>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    {PERSONAL_INFO.status}
+                <BoxReveal boxColor={"#939393"} duration={0.5}>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      {PERSONAL_INFO.status}
+                    </div>
+                    <div>{PERSONAL_INFO.location}</div>
                   </div>
-                  <div>{PERSONAL_INFO.location}</div>
-                </div>
+                </BoxReveal>
               </div>
             </div>
 
             <div className="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
-                <div className="space-y-2">
-                  <div className="text-foreground">{CURRENT_POSITION.title}</div>
-                  <div className="text-muted-foreground">@ {CURRENT_POSITION.organization}</div>
-                  <div className="text-xs text-muted-foreground">{CURRENT_POSITION.period}</div>
-                </div>
+                <BoxReveal boxColor={"#939393"} duration={0.5}>
+                  <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
+                </BoxReveal>
+                <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
+                  <div className="space-y-2">
+                    <div className="text-foreground">{CURRENT_POSITION.title}</div>
+                    <div className="text-muted-foreground">@ {CURRENT_POSITION.organization}</div>
+                    <div className="text-xs text-muted-foreground">{CURRENT_POSITION.period}</div>
+                  </div>
+                </BoxReveal>
               </div>
 
               <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
-                <div className="flex flex-wrap gap-2">
-                  {FOCUS_AREAS.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                <BoxReveal boxColor={"#939393"} duration={0.5}>
+                  <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
+                </BoxReveal>
+                <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
+                  <div className="flex flex-wrap gap-2">
+                    {FOCUS_AREAS.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </BoxReveal>
               </div>
             </div>
           </div>
@@ -356,10 +400,27 @@ export default function Home() {
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16">
-            <h2 className="text-3xl sm:text-4xl font-light">Key Projects</h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <h2 className="text-3xl sm:text-4xl font-light">Key Projects</h2>
+              <div className="flex flex-wrap gap-2">
+                {["All", "Web", "Game", "AI/ML"].map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setActiveCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                      activeCategory === category
+                        ? "bg-foreground text-background"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
-              {PROJECTS.map((project, index) => (
+              {paginatedProjects.map((project, index) => (
                 <article
                   key={index}
                   className="group p-6 sm:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
@@ -403,6 +464,40 @@ export default function Home() {
                 </article>
               ))}
             </div>
+
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 rounded-full border border-border text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-muted transition-colors"
+                >
+                  Previous
+                </button>
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-8 h-8 rounded-full text-sm flex items-center justify-center transition-all ${
+                        currentPage === page
+                          ? "bg-foreground text-background"
+                          : "bg-muted/30 text-muted-foreground hover:bg-muted"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 rounded-full border border-border text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-muted transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
