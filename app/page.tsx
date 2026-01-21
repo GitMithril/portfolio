@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import { Github, Linkedin } from "lucide-react"
 import { AnimatedThemeToggle } from "@/components/animated-theme-toggle"
 import { BoxReveal } from "@/components/magicui/box-reveal"
 
@@ -37,8 +38,8 @@ const FOCUS_AREAS = [
   "UI/UX Engineering",
   "RAG",
   "AI/ML",
-  "LLMs",
-  "Frontend Design",
+  "LLMs/GenAI",
+  "Graphic Design",
 ]
 
 // Education Items
@@ -208,6 +209,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      {/* Social Links - Top Left */}
+      <div className="fixed top-6 left-6 z-50">
+        <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-background/80 backdrop-blur-sm border border-border shadow-sm">
+          {SOCIAL_LINKS.map((link) => (
+            <Link
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={link.name}
+            >
+              {link.name === "GitHub" ? <Github className="w-5 h-5" /> : <Linkedin className="w-5 h-5" />}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Animated Theme Toggle - Top Right */}
       <div className="fixed top-6 right-6 z-50">
         <AnimatedThemeToggle variant="circle" start="top-right" />
