@@ -3,12 +3,58 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { Github, Linkedin } from "lucide-react"
+import { useTheme } from "next-themes"
 import { AnimatedThemeToggle } from "@/components/animated-theme-toggle"
 import { BoxReveal } from "@/components/magicui/box-reveal"
+import LogoLoop from "@/components/reactbits/logoloop"
+import {
+  SiReact,
+  SiTypescript,
+  SiNextdotjs,
+  SiMongodb,
+  SiMysql,
+  SiSupabase,
+  SiGoogle,
+  SiAnthropic,
+  SiOpenai,
+  SiTailwindcss,
+  SiFastapi,
+  SiVercel,
+  SiGithub,
+  SiPytorch,
+  SiScikitlearn,
+  SiFigma,
+  SiNotion,
+  SiSlack,
+  SiPostman,
+} from "react-icons/si"
 
 // ============================================
 // DYNAMIC CONTENT CONFIGURATION
 // ============================================
+
+const TECH_LOGOS = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiMongodb />, title: "MongoDB", href: "https://www.mongodb.com" },
+  { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com" },
+  { node: <SiSupabase />, title: "Supabase", href: "https://supabase.com" },
+  { node: <SiGoogle />, title: "Gemini", href: "https://deepmind.google/technologies/gemini/" },
+  { node: <SiAnthropic />, title: "Claude", href: "https://www.anthropic.com" },
+  { node: <SiOpenai />, title: "ChatGPT", href: "https://openai.com" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiFastapi />, title: "FastBI", href: "https://fastapi.tiangolo.com" },
+  { node: <SiVercel />, title: "Vercel", href: "https://vercel.com" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+  { node: <SiPytorch />, title: "PyTorch", href: "https://pytorch.org" },
+  { node: <SiScikitlearn />, title: "Scikit-Learn", href: "https://scikit-learn.org" },
+  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
+  { node: <SiNotion />, title: "Notion", href: "https://www.notion.so" },
+  { node: <SiSlack />, title: "Slack", href: "https://slack.com" },
+  { node: <SiPostman />, title: "Postman", href: "https://www.postman.com" },
+  { node: <SiVercel />, title: "v0.dev", href: "https://v0.dev" },
+]
 
 // Personal Information
 const PERSONAL_INFO = {
@@ -78,7 +124,7 @@ const EXPERIENCE_ITEMS = [
     role: "Programming Intern",
     company: "DevDen Faisalabad",
     description: "Developed web applications and learned industry best practices in software development.",
-    tech: ["React", "Node.js", "MongoDB"],
+    tech: ["C++", "JavaScript"],
   },
 ]
 
@@ -167,10 +213,16 @@ const NAV_SECTIONS = ["intro", "education", "experience", "projects", "skills", 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("")
   const sectionsRef = useRef<(HTMLElement | null)[]>([])
+  const { theme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   // Projects Filter & Pagination State
   const [activeCategory, setActiveCategory] = useState("All")
   const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const filteredProjects = PROJECTS.filter((project) => {
     if (activeCategory === "All") return true
@@ -211,7 +263,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground relative">
       {/* Social Links - Top Left */}
       <div className="fixed top-6 left-6 z-50">
-        <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-background/80 backdrop-blur-sm border border-border shadow-sm">
+        <div className="flex items-center gap-5 px-4 py-2.5 rounded-2xl bg-background/80 backdrop-blur-sm border-0 border-border shadow-sm">
           {SOCIAL_LINKS.map((link) => (
             <Link
               key={link.name}
@@ -255,7 +307,7 @@ export default function Home() {
         <header
           id="intro"
           ref={(el) => { sectionsRef.current[0] = el }}
-          className="min-h-screen flex items-center"
+          className="min-h-screen flex flex-col justify-center gap-15 py-12"
         >
           <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
             <div className="lg:col-span-3 space-y-6 sm:space-y-8">
@@ -329,6 +381,22 @@ export default function Home() {
                 </BoxReveal>
               </div>
             </div>
+          </div>
+          
+          <div className="w-full pt-0 relative max-w-[90vw] mx-auto">
+            {mounted && (
+              <LogoLoop
+                logos={TECH_LOGOS}
+                speed={40}
+                direction="left"
+                logoHeight={32}
+                gap={50}
+                pauseOnHover={true}
+                fadeOut={true}
+                fadeOutColor={(resolvedTheme || theme) === 'dark' ? 'oklch(0.145 0 0)' : 'oklch(1 0 0)'}
+                className="opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
+            )}
           </div>
         </header>
 
