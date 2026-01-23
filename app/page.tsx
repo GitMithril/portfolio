@@ -383,7 +383,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="w-full pt-0 relative max-w-[81vw] pr-4 mx-auto">
+          <div className="w-full pt-0 relative max-w-[81vw] pr-8 mx-auto">
             {mounted && (
               <LogoLoop
                 logos={TECH_LOGOS}
