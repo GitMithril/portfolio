@@ -262,8 +262,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
       {/* Social Links - Top Left */}
-      <div className="fixed top-6 left-6 z-50">
-        <div className="flex items-center gap-5 px-4 py-2.5 rounded-2xl bg-background/80 backdrop-blur-sm border-0 border-border shadow-sm">
+      <div className="fixed top-5 left-5 z-50">
+        <div className="flex items-center gap-4 px-3 py-2 rounded-xl bg-background/80 backdrop-blur-sm border-0 border-border shadow-sm">
           {SOCIAL_LINKS.map((link) => (
             <Link
               key={link.name}
@@ -273,29 +273,29 @@ export default function Home() {
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label={link.name}
             >
-              {link.name === "GitHub" ? <Github className="w-5 h-5" /> : <Linkedin className="w-5 h-5" />}
+              {link.name === "GitHub" ? <Github className="w-4 h-4" /> : <Linkedin className="w-4 h-4" />}
             </Link>
           ))}
         </div>
       </div>
 
       {/* Animated Theme Toggle - Top Right */}
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed top-5 right-5 z-50">
         <AnimatedThemeToggle variant="circle" start="top-right" />
       </div>
 
-      <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-10 hidden lg:block group p-4">
-        <div className="flex flex-col gap-4">
+      <nav className="fixed left-3 top-1/2 -translate-y-1/2 z-10 hidden lg:block group p-3">
+        <div className="flex flex-col gap-3">
           {NAV_SECTIONS.map((section) => (
             <div key={section} className="relative flex items-center">
               <button
                 onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
-                className={`w-2 h-8 rounded-full transition-all duration-500 ${
+                className={`w-1.5 h-7 rounded-full transition-all duration-500 ${
                   activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
                 }`}
                 aria-label={`Navigate to ${section}`}
               />
-              <span className="absolute left-6 text-xs font-mono uppercase tracking-wider text-muted-foreground whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none">
+              <span className="absolute left-5 text-[10px] font-mono uppercase tracking-wider text-muted-foreground whitespace-nowrap opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none">
                 {section}
               </span>
             </div>
@@ -303,20 +303,20 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative pt-8 lg:pt-0 z-10">
+      <main className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-12 relative lg:pt-0 z-10">
         <header
           id="intro"
           ref={(el) => { sectionsRef.current[0] = el }}
-          className="min-h-screen flex flex-col justify-center gap-15 py-12"
+          className="min-h-screen flex flex-col justify-center gap-12 py-2"
         >
           <div className="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
             <div className="lg:col-span-3 space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-2">
                 <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
-                  <div className="text-sm pl-1 text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
+                  <div className="text-xs pl-1 text-muted-foreground font-mono tracking-wider">PORTFOLIO / 2026</div>
                 </BoxReveal>
                 <BoxReveal boxColor={"#939393"} duration={0.5}>
-                  <h1 className="text-5xl pb-3 sm:text-6xl lg:text-7xl font-light tracking-tight">
+                  <h1 className="text-4xl pb-2 sm:text-5xl lg:text-6xl font-light tracking-tight">
                     {PERSONAL_INFO.firstName}
                     <br />
                     <span className="text-muted-foreground">{PERSONAL_INFO.lastName}</span>
@@ -324,9 +324,9 @@ export default function Home() {
                 </BoxReveal>
               </div>
 
-              <div className="space-y-6 max-w-md">
+              <div className="space-y-5 max-w-md">
                 <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
-                  <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                     {PERSONAL_INFO.tagline}
                     {PERSONAL_INFO.taglineHighlights.map((highlight, idx) => (
                       <span key={highlight}>
@@ -338,9 +338,9 @@ export default function Home() {
                 </BoxReveal>
 
                 <BoxReveal boxColor={"#939393"} duration={0.5}>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
                       {PERSONAL_INFO.status}
                     </div>
                     <div>{PERSONAL_INFO.location}</div>
@@ -349,16 +349,16 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
-              <div className="space-y-4">
+            <div className="lg:col-span-2 flex flex-col justify-end space-y-5 sm:space-y-6 mt-6 lg:mt-0">
+              <div className="space-y-3">
                 <BoxReveal boxColor={"#939393"} duration={0.5}>
-                  <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
+                  <div className="text-xs text-muted-foreground font-mono">CURRENTLY</div>
                 </BoxReveal>
                 <BoxReveal boxColor={"#b3b3b3"} duration={0.5}>
-                  <div className="space-y-2">
-                    <div className="text-foreground">{CURRENT_POSITION.title}</div>
-                    <div className="text-muted-foreground">@ {CURRENT_POSITION.organization}</div>
-                    <div className="text-xs text-muted-foreground">{CURRENT_POSITION.period}</div>
+                  <div className="space-y-1.5">
+                    <div className="text-sm text-foreground">{CURRENT_POSITION.title}</div>
+                    <div className="text-sm text-muted-foreground">@ {CURRENT_POSITION.organization}</div>
+                    <div className="text-[10px] text-muted-foreground">{CURRENT_POSITION.period}</div>
                   </div>
                 </BoxReveal>
               </div>
@@ -372,7 +372,7 @@ export default function Home() {
                     {FOCUS_AREAS.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
+                        className="px-2 py-1 text-xs border border-border rounded-full hover:border-muted-foreground/50 transition-colors duration-300"
                       >
                         {skill}
                       </span>
@@ -383,14 +383,14 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="w-full pt-0 relative max-w-[90vw] mx-auto">
+          <div className="w-full pt-0 relative max-w-[81vw] pr-4 mx-auto">
             {mounted && (
               <LogoLoop
                 logos={TECH_LOGOS}
                 speed={40}
                 direction="left"
-                logoHeight={32}
-                gap={50}
+                logoHeight={28}
+                gap={45}
                 pauseOnHover={true}
                 fadeOut={true}
                 fadeOutColor={(resolvedTheme || theme) === 'dark' ? 'oklch(0.145 0 0)' : 'oklch(1 0 0)'}
@@ -403,30 +403,30 @@ export default function Home() {
         <section
           id="education"
           ref={(el) => { sectionsRef.current[1] = el }}
-          className="py-20 sm:py-32 opacity-0"
+          className="py-16 sm:py-24 opacity-0"
         >
-          <div className="space-y-8 sm:space-y-12">
-            <h2 className="text-3xl sm:text-4xl font-light">Education</h2>
+          <div className="space-y-6 sm:space-y-10">
+            <h2 className="text-2xl sm:text-3xl font-light">Education</h2>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {EDUCATION_ITEMS.map((item, index) => (
                 <div
                   key={index}
-                  className="group grid lg:grid-cols-12 gap-4 sm:gap-6 py-4 border-b border-border/50 hover:border-border transition-colors duration-500"
+                  className="group grid lg:grid-cols-12 gap-3 sm:gap-5 py-3 border-b border-border/50 hover:border-border transition-colors duration-500"
                 >
                   <div className="lg:col-span-3">
-                    <div className="text-sm font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-500">
+                    <div className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-500">
                       {item.year}
                     </div>
                   </div>
 
                   <div className="lg:col-span-6">
-                    <h3 className="text-base sm:text-lg font-medium">{item.degree}</h3>
-                    <div className="text-sm text-muted-foreground">{item.institution}</div>
+                    <h3 className="text-sm sm:text-base font-medium">{item.degree}</h3>
+                    <div className="text-xs text-muted-foreground">{item.institution}</div>
                   </div>
 
                   <div className="lg:col-span-3 flex items-start lg:justify-end">
-                    <span className="text-sm text-muted-foreground">{item.details}</span>
+                    <span className="text-xs text-muted-foreground">{item.details}</span>
                   </div>
                 </div>
               ))}
@@ -437,32 +437,32 @@ export default function Home() {
         <section
           id="experience"
           ref={(el) => { sectionsRef.current[2] = el }}
-          className="min-h-screen py-20 sm:py-32 opacity-0"
+          className="min-h-screen py-16 sm:py-24 opacity-0"
         >
-          <div className="space-y-12 sm:space-y-16">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-              <h2 className="text-3xl sm:text-4xl font-light">Experience</h2>
-              <div className="text-sm text-muted-foreground font-mono">2024</div>
+          <div className="space-y-10 sm:space-y-12">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+              <h2 className="text-2xl sm:text-3xl font-light">Experience</h2>
+              {/* <div className="text-xs text-muted-foreground font-mono">2024</div> */}
             </div>
 
-            <div className="space-y-8 sm:space-y-12">
+            <div className="space-y-6 sm:space-y-4">
               {EXPERIENCE_ITEMS.map((item, index) => (
                 <div
                   key={index}
                   className="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500"
                 >
                   <div className="lg:col-span-2">
-                    <div className="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
+                    <div className="text-xl sm:text-xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
                       {item.year}
                     </div>
                   </div>
 
                   <div className="lg:col-span-6 space-y-3">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-medium">{item.role}</h3>
+                      <h3 className="text-lg sm:text-lg font-medium">{item.role}</h3>
                       <div className="text-muted-foreground">{item.company}</div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg">{item.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-md">{item.description}</p>
                   </div>
 
                   <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
@@ -484,17 +484,17 @@ export default function Home() {
         <section
           id="projects"
           ref={(el) => { sectionsRef.current[3] = el }}
-          className="min-h-screen py-20 sm:py-32 opacity-0"
+          className="min-h-screen py-16 sm:py-24 opacity-0"
         >
-          <div className="space-y-12 sm:space-y-16">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-              <h2 className="text-3xl sm:text-4xl font-light">Key Projects</h2>
-              <div className="flex flex-wrap gap-2">
+          <div className="space-y-10 sm:space-y-12">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+              <h2 className="text-2xl sm:text-3xl font-light">Key Projects</h2>
+              <div className="flex flex-wrap gap-1.5">
                 {["All", "Web", "Game", "AI/ML"].map((category) => (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                    className={`px-3 py-1.5 rounded-full text-xs transition-all duration-300 ${
                       activeCategory === category
                         ? "bg-foreground text-background"
                         : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -506,34 +506,34 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+            <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
               {paginatedProjects.map((project, index) => (
                 <article
                   key={index}
-                  className="group p-6 sm:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
+                  className="group p-5 sm:p-6 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-[10px] text-muted-foreground font-mono">
                       <span>{project.category}</span>
                       <span>{project.tech}</span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg font-medium group-hover:text-muted-foreground transition-colors duration-300">
                       {project.title}
                     </h3>
 
-                    <p className="text-muted-foreground leading-relaxed">{project.excerpt}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{project.excerpt}</p>
 
                     {project.link && (
                       <Link
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300"
                       >
                         <span>View project</span>
                         <svg
-                          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                          className="w-3 h-3 transform group-hover:translate-x-1 transition-transform duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -591,19 +591,19 @@ export default function Home() {
         <section
           id="skills"
           ref={(el) => { sectionsRef.current[4] = el }}
-          className="py-20 sm:py-32 opacity-0"
+          className="py-16 sm:py-24 opacity-0"
         >
-          <div className="space-y-12 sm:space-y-16">
-            <h2 className="text-3xl sm:text-4xl font-light">Skills & Languages</h2>
+          <div className="space-y-10 sm:space-y-12">
+            <h2 className="text-2xl sm:text-3xl font-light">Skills & Languages</h2>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <h3 className="text-xl font-medium text-muted-foreground">Technical Skills</h3>
-                <div className="flex flex-wrap gap-3">
+            <div className="grid lg:grid-cols-2 gap-10">
+              <div className="space-y-5">
+                <h3 className="text-lg font-medium text-muted-foreground">Technical Skills</h3>
+                <div className="flex flex-wrap gap-2">
                   {TECHNICAL_SKILLS.map((skill) => (
                     <span
                       key={skill}
-                      className="px-4 py-2 text-sm border border-border rounded-lg hover:border-muted-foreground/50 transition-colors duration-300"
+                      className="px-3 py-1.5 text-xs border border-border rounded-lg hover:border-muted-foreground/50 transition-colors duration-300"
                     >
                       {skill}
                     </span>
@@ -611,13 +611,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <h3 className="text-xl font-medium text-muted-foreground">Programming Languages</h3>
-                <div className="flex flex-wrap gap-3">
+              <div className="space-y-5">
+                <h3 className="text-lg font-medium text-muted-foreground">Programming Languages</h3>
+                <div className="flex flex-wrap gap-2">
                   {PROGRAMMING_LANGUAGES.map((lang) => (
                     <span
                       key={lang}
-                      className="px-4 py-2 text-sm border border-border rounded-lg hover:border-muted-foreground/50 transition-colors duration-300"
+                      className="px-3 py-1.5 text-xs border border-border rounded-lg hover:border-muted-foreground/50 transition-colors duration-300"
                     >
                       {lang}
                     </span>
@@ -626,13 +626,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-6 pt-8 border-t border-border">
-              <h3 className="text-xl font-medium text-muted-foreground">Key Courses</h3>
-              <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-5 pt-6 border-t border-border">
+              <h3 className="text-lg font-medium text-muted-foreground">Key Courses</h3>
+              <div className="grid sm:grid-cols-2 gap-3">
                 {KEY_COURSES.map((course, index) => (
-                  <div key={index} className="p-4 border border-border rounded-lg">
-                    <div className="font-medium">{course.title}</div>
-                    <div className="text-sm text-muted-foreground">{course.provider}</div>
+                  <div key={index} className="p-3 border border-border rounded-lg">
+                    <div className="text-sm font-medium">{course.title}</div>
+                    <div className="text-xs text-muted-foreground">{course.provider}</div>
                   </div>
                 ))}
               </div>
@@ -640,24 +640,24 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="connect" ref={(el) => { sectionsRef.current[5] = el }} className="py-20 sm:py-32 opacity-0">
-          <div className="grid lg:grid-cols-2 gap-12 sm:gap-16">
-            <div className="space-y-6 sm:space-y-8">
-              <h2 className="text-3xl sm:text-4xl font-light">Let's Connect</h2>
+        <section id="connect" ref={(el) => { sectionsRef.current[5] = el }} className="py-16 sm:py-24 opacity-0">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12">
+            <div className="space-y-5 sm:space-y-6">
+              <h2 className="text-2xl sm:text-3xl font-light">Let's Connect</h2>
 
-              <div className="space-y-6">
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              <div className="space-y-5">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                   {PERSONAL_INFO.bio}
                 </p>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <Link
                     href={`mailto:${PERSONAL_INFO.email}`}
-                    className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300"
+                    className="group flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors duration-300"
                   >
-                    <span className="text-base sm:text-lg">{PERSONAL_INFO.email}</span>
+                    <span className="text-sm sm:text-base">{PERSONAL_INFO.email}</span>
                     <svg
-                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                      className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -665,26 +665,26 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
-                  <div className="text-muted-foreground">{PERSONAL_INFO.phone}</div>
+                  <div className="text-sm text-muted-foreground">{PERSONAL_INFO.phone}</div>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-6 sm:space-y-8">
-              <div className="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
+            <div className="space-y-5 sm:space-y-6">
+              <div className="text-xs text-muted-foreground font-mono">ELSEWHERE</div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {SOCIAL_LINKS.map((social) => (
                   <Link
                     key={social.name}
                     href={social.url}
-                    className="group p-4 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
+                    className="group p-3 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm"
                   >
-                    <div className="space-y-2">
-                      <div className="text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                    <div className="space-y-1.5">
+                      <div className="text-sm text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                         {social.name}
                       </div>
-                      <div className="text-sm text-muted-foreground">{social.handle}</div>
+                      <div className="text-xs text-muted-foreground">{social.handle}</div>
                     </div>
                   </Link>
                 ))}
@@ -693,17 +693,17 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="py-12 sm:py-16 border-t border-border">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
-            <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">© 2025 {PERSONAL_INFO.firstName} {PERSONAL_INFO.lastName}. All rights reserved.</div>
-              <div className="text-xs text-muted-foreground">{PERSONAL_INFO.footer}</div>
+        <footer className="py-10 sm:py-12 border-t border-border">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 sm:gap-6">
+            <div className="space-y-1.5">
+              <div className="text-xs text-muted-foreground">© 2025 {PERSONAL_INFO.firstName} {PERSONAL_INFO.lastName}. All rights reserved.</div>
+              <div className="text-[10px] text-muted-foreground">{PERSONAL_INFO.footer}</div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <button className="group p-3 rounded-lg border border-border hover:border-muted-foreground/50 transition-all duration-300">
+            <div className="flex items-center gap-3">
+              <button className="group p-2.5 rounded-lg border border-border hover:border-muted-foreground/50 transition-all duration-300">
                 <svg
-                  className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                  className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -721,7 +721,7 @@ export default function Home() {
         </footer>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
+      <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
     </div>
   )
 }
