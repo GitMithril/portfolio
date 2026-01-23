@@ -303,7 +303,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10">
+      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative pt-8 lg:pt-0 z-10">
         <header
           id="intro"
           ref={(el) => { sectionsRef.current[0] = el }}
