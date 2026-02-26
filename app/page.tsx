@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { Github, Linkedin } from "lucide-react"
+import { Github, Linkedin, Download } from "lucide-react"
 import { useTheme } from "next-themes"
 import { AnimatedThemeToggle } from "@/components/animated-theme-toggle"
 import { BoxReveal } from "@/components/magicui/box-reveal"
@@ -279,8 +279,16 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Animated Theme Toggle - Top Right */}
-      <div className="fixed top-5 right-5 z-50">
+      {/* Resume + Theme Toggle - Top Right */}
+      <div className="fixed top-5 right-5 z-50 flex items-center gap-4.5">
+        <a
+          href="/AbdullahEjaz.pdf"
+          download
+          className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-all duration-300 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.4)] dark:hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.35)]"
+        >
+          <Download className="w-3.5 h-3.5" />
+          <span>Resume</span>
+        </a>
         <AnimatedThemeToggle variant="circle" start="top-right" />
       </div>
 
