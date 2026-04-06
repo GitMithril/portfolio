@@ -64,7 +64,7 @@ const PERSONAL_INFO = {
   taglineHighlights: ["Design", "Programming & Development"],
   status: "Available for opportunities",
   location: "Faisalabad, Pakistan",
-  email: "hello@abdullahejaz.dev",
+  email: "killerbrine55@gmail.com",
   phone: "+92-306-1663177",
   bio: "A passionate computer enthusiast with a mission to improve basic life necessities and make them as simple as the pressing of a button.",
   footer: "Design | Program | Develop",
