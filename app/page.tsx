@@ -120,7 +120,7 @@ const EXPERIENCE_ITEMS = [
     tech: ["Figma", "Photoshop", "Canva"],
   },
   {
-    year: "2021",
+    year: "2022",
     role: "Programming Intern",
     company: "DevDen Faisalabad",
     description: "Developed web applications and learned industry best practices in software development.",
@@ -131,12 +131,49 @@ const EXPERIENCE_ITEMS = [
 // Projects
 const PROJECTS = [
   {
+    title: "NastaRead",
+    excerpt: "OCR pipeline for degraded Urdu Nastaleeq text with restoration, transcription, and API deployment. Parallelized inference using Hadoop MapReduce in a fully containerized Docker environment, enabling horizontal scaling for large document batches.",
+    tech: "Python, PyTorch, FastAPI, Hadoop, Docker",
+    category: "Restoration-OCR Pipeline",
+    type: ["Web", "AI/ML"],
+    github: "https://github.com/GitMithril/distributed-urdu-ocr",
+    link: "https://distributed-urdu-ocr-frontend.vercel.app/", // Add project URL here
+  },
+  {
+    title: "Smog Penalty",
+    excerpt: "ML Based Web Application to Predict power lost due to smog levels (PM2.5) in the air, using regression and tree based models and data from sources such as NASA POWER and OpenAQ for weather. Trained on 3 years of data, solar grid sites in US & Australia.",
+    tech: "Python, ML, Web Development",
+    category: "ML / WebDev",
+    type: ["Web", "AI/ML"],
+    github: "https://github.com/GitMithril/Smog-Penalty", // Add project URL here
+    link: "",
+  },
+  {
     title: "CrimeVision",
     excerpt: "Built a MERN full-stack crime data platform with real-time mapping, AI-based trend forecasting, and safe route planning. Features include public crime reporting, analytics dashboards, and heatmap visualizations.",
     tech: "React, Node.js, MongoDB",
     category: "Crime Analysis Platform",
     type: ["Web"],
+    github: "https://github.com/GitMithril/CrimeVision-backend",
     link: "https://www.crimevision.live/", // Add project URL here
+  },
+  {
+    title: "NUST QA Chatbot",
+    excerpt: "An intelligent, retrieval-first QA system powered by Locality Sensitive Hashing (LSH) and Hybrid Retrieval over the NUST Undergraduate and Postgraduate Student Handbooks. No Hallucinations, just accurate answers to student queries about courses, policies, and campus life.",
+    tech: "Python, FastAPI, LSH, RAG",
+    category: "Python / Big Data",
+    type: ["Web", "AI/ML"],
+    github: "https://github.com/GitMithril/NUST_Student_Guide_Chatbot", // Add project URL here
+    link: "https://nust-student-guide-chatbot.vercel.app/",
+  },
+  {
+    title: "Emergency Response App",
+    excerpt: "Cross-platform emergency response app with geolocation and voice workflows, backed by a Node/Express + MongoDB API.",
+    tech: "React Native, Node.js, MongoDB, Gemini",
+    category: "Mobile App",
+    type: ["Mobile App"],
+    github: "https://github.com/GitMithril/Emergency-Response-App", // Add project URL here
+    link: "",
   },
   {
     title: "TheAnnoyingTraps",
@@ -144,7 +181,8 @@ const PROJECTS = [
     tech: "Python, Pygame, AI",
     category: "Game Development",
     type: ["Game", "AI/ML"],
-    link: "https://github.com/GitMithril/The_Annoying_Traps", // Add project URL here
+    github: "https://github.com/GitMithril/The_Annoying_Traps", // Add project URL here
+    link: "",
   },
   {
     title: "The Stronghold Reckoning",
@@ -152,15 +190,8 @@ const PROJECTS = [
     tech: "C++, SFML",
     category: "Game Development",
     type: ["Game"],
-    link: "https://github.com/GitMithril/Stronghold_Reckon", // Add project URL here
-  },
-  {
-    title: "Smog Penalty",
-    excerpt: "ML Based Web Application to Predict power lost due to smog levels (PM2.5) in the air, using regression and tree based models and data from sources such as NASA POWER and OpenAQ for weather. Trained on 3 years of data.",
-    tech: "Python, ML, Web Development",
-    category: "ML / WebDev",
-    type: ["Web", "AI/ML"],
-    link: "https://github.com/GitMithril/Smog-Penalty", // Add project URL here
+    github: "https://github.com/GitMithril/Stronghold_Reckon", // Add project URL here
+    link: "",
   },
 ]
 
@@ -174,6 +205,9 @@ const TECHNICAL_SKILLS = [
   "Design Thinking",
   "Photoshop/Canva",
   "Scikit-Learn",
+  "PyTorch",
+  "RAG & Retrieval Systems",
+  "TensorFlow",
   "Data Analysis Tools",
   "Git & GitHub",
 ]
@@ -532,29 +566,42 @@ export default function Home() {
 
                     <p className="text-sm text-muted-foreground leading-relaxed">{project.excerpt}</p>
 
-                    {project.link && (
-                      <Link
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                      >
-                        <span>View project</span>
-                        <svg
-                          className="w-3 h-3 transform group-hover:translate-x-1 transition-transform duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                    <div className="flex items-center justify-between gap-4 pt-1">
+                      {project.github?.trim() && (
+                        <Link
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                      </Link>
-                    )}
+                          <span>View project</span>
+                          <svg
+                            className="w-3 h-3 transform group-hover:translate-x-1 transition-transform duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </Link>
+                      )}
+
+                      {project.link?.trim() && (
+                        <Link
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-auto text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                        >
+                          LIVE↗
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </article>
               ))}
