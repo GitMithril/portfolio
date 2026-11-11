@@ -94,7 +94,7 @@ const EDUCATION_ITEMS = [
     year: "2023 — Present",
     degree: "Bachelor of Computer Science",
     institution: "NUST - Islamabad",
-    details: "CGPA: 3.66",
+    details: "CGPA: 3.65",
   },
   {
     year: "2021 — 2023",
